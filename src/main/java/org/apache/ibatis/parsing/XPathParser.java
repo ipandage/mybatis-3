@@ -264,6 +264,7 @@ public class XPathParser {
     this.validation = validation;
     this.entityResolver = entityResolver;
     this.variables = variables;
+    // 使用默认的对象模型得到一个新的XPathFactory实例
     XPathFactory factory = XPathFactory.newInstance();
     this.xpath = factory.newXPath();
   }

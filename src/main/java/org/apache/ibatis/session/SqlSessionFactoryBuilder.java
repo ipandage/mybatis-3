@@ -11,7 +11,7 @@
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ *    limitations under the License.SqlSessionFactoryBuilder
  */
 package org.apache.ibatis.session;
 
@@ -72,9 +72,18 @@ public class SqlSessionFactoryBuilder {
     return build(inputStream, null, properties);
   }
 
+	/**
+	 *
+	 * @param inputStream 外部文件输入流
+	 * @param environment 环境名称
+	 * @param properties 外部配置
+	 * @return
+	 */
   public SqlSessionFactory build(InputStream inputStream, String environment, Properties properties) {
     try {
       XMLConfigBuilder parser = new XMLConfigBuilder(inputStream, environment, properties);
+      // parser.parse() 读取配置文件 返回 configuration
+		// 根据返回的 configuration 创建 SqlSessionFactory
       return build(parser.parse());
     } catch (Exception e) {
       throw ExceptionFactory.wrapException("Error building SqlSession.", e);

@@ -96,10 +96,15 @@ public class XMLConfigBuilder extends BaseBuilder {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
     }
     parsed = true;
+    // 读取mybatis-config.xml配置信息， configuration 是根节点
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }
 
+	/**
+	 * 读取配置文件组装的 configuration
+	 * @param root
+	 */
   private void parseConfiguration(XNode root) {
     try {
       //issue #117 read properties first
@@ -329,6 +334,11 @@ public class XMLConfigBuilder extends BaseBuilder {
     throw new BuilderException("Environment declaration requires a DataSourceFactory.");
   }
 
+	/**
+	 * 读取typeHandlers配置并注册
+	 * @param parent 配置文件typeHandlers节点
+	 * @throws Exception
+	 */
   private void typeHandlerElement(XNode parent) throws Exception {
     if (parent != null) {
       for (XNode child : parent.getChildren()) {
